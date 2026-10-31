@@ -83,7 +83,10 @@ async def current_member(user: dict = Depends(require_user)) -> dict:
     uid = user["user_id"]
     member = await db.members.find_one({"user_id": uid}, {"_id": 0})
     if member is None:
-        cu = await run_in_threadpool(_clerk_user, uid)
+        try:
+            cu = await run_in_threadpool(_clerk_user, uid)
+        except requests.RequestException:
+            raise HTTPException(503, "Hesap bilgisi alınamadı, lütfen tekrar deneyin")
         emails = _verified_emails(cu)
         name = " ".join(filter(None, [cu.get("first_name"), cu.get("last_name")])) or (emails[0] if emails else "")
         invite = await db.invites.find_one({"email": {"$in": emails}}, {"_id": 0}) if emails else None
@@ -325,7 +328,8 @@ async def get_job_or_404(jid: str, ctx: dict) -> dict:
 
 
 async def jobs_this_month(company_id: str) -> int:
-    return await db.jobs.count_documents({"company_id": company_id, "created_month": now_local().strftime("%Y-%m")})
+    u = await db.usage.find_one({"company_id": company_id, "month": now_local().strftime("%Y-%m")}, {"_id": 0})
+    return u["jobs"] if u else 0
 
 
 async def _resolve_job_refs(body: JobIn, ctx: dict) -> dict:
@@ -371,6 +375,7 @@ async def create_job(body: JobIn, ctx: dict = Depends(require_owner)):
            "public_token": secrets.token_urlsafe(16), "completed_at": None, "completed_month": None,
            "created_month": now_local().strftime("%Y-%m"), "created_at": now_iso()}
     await db.jobs.insert_one(dict(job))
+    await db.usage.update_one({"company_id": ctx["company_id"], "month": job["created_month"]}, {"$inc": {"jobs": 1}}, upsert=True)
     return job
 
 

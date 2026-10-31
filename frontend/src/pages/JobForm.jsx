@@ -40,6 +40,7 @@ export default function JobForm() {
   }, [api, id]);
 
   const pickCustomer = (cid) => {
+    if (!cid) return;
     const c = customers.find((x) => x.id === cid);
     setForm((f) => ({ ...f, customer_id: cid, address: f.address || c?.address || "" }));
   };

@@ -1,4 +1,4 @@
-import os, json, urllib.request, urllib.error, sys
+import os, json, urllib.request, urllib.error, urllib.parse, sys
 import requests
 from dotenv import load_dotenv
 load_dotenv("/app/backend/.env")
@@ -12,7 +12,7 @@ def bapi(method, path, body=None):
 
 
 def ensure_user(email, first):
-    r = bapi("GET", f"/users?email_address={email}")
+    r = bapi("GET", f"/users?email_address={urllib.parse.quote(email)}")
     if r.ok and r.json():
         return r.json()[0]
     r = bapi("POST", "/users", {"email_address": [email], "password": "Test-pass-12345!", "skip_password_checks": True, "first_name": first})

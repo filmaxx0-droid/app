@@ -1,0 +1,39 @@
+{
+  "summary": "E2E test of SahaCep (backend + frontend). Backend: 22/22 pytest pass, covering /me, company, customers CRUD, isolation (409 without a company, 404 across companies), jobs CRUD, filters aktif/tamamlandi and scope=today, status patch, complete, payment patch, free-plan 402 on the 16th job, invite 402 on free and 200 on pro, staff auto-join via /me, staff sees only assigned jobs, staff gets 403 on customers/receivables/POST jobs, photo multipart upload once/sonra, /files with auth (401 without, 404 cross-company), public form 404 until the job is completed, public photo endpoint, dashboard numbers, Stripe checkout URL plus pending status. Frontend: landing (Turkish), ticket sign-in, onboarding, dashboard, new job, job detail status buttons, photo upload, complete panel, share panel with WhatsApp link, public service form at 390px with photos and the invalid-token state, receivables mark paid, jobs table filters and search, customers, team invite (pro), company settings, billing redirect to checkout.stripe.com, mobile bottom nav (owner 5 items, staff 2 items), staff mobile flow (assigned job only, no edit/delete, complete with kart), refresh keeps session, sign-out goes to /sign-in. One real UI bug: a customer created with the '+ Yeni' dialog in the job form is not selected.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/jobs (free limit)", "issue": "jobs_this_month counts the jobs that exist now (count_documents on created_month). An owner can delete jobs to get free quota back and so bypass the 15/month limit. Use a per-month counter on the company doc that only goes up."},
+      {"endpoint": "current_member (_clerk_user)", "issue": "If the Clerk API fails, requests.raise_for_status bubbles up as a generic 500. Catch it and return 503 with a Turkish message. Do not fall back to a default role."},
+      {"endpoint": "GET /api/payments/status/{session_id}", "issue": "Unauthenticated. Low risk, since the session id is needed and the call is idempotent, but consider requiring auth plus company match."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "JobForm customer select + CustomerDialog ('+ Yeni')", "issue": "After the dialog creates a customer, the address autofills but the Select shows the 'Müşteri seçin' placeholder. form.customer_id is reset to '', so pressing 'İşi oluştur' shows the toast 'Müşteri seçin' and no POST /api/jobs is sent. RCA: Radix Select gets value=c.id in the same render that the new SelectItem is added. Radix's hidden native select/onValueChange then sends '' to pickCustomer, which overwrites customer_id. Fix: in pickCustomer add `if (!cid) return;`, or set customer_id in a later tick / after the customers state updates. Picking the customer by hand afterwards works.", "selector": "[data-testid='job-customer-select'], [data-testid='job-new-customer-button']", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Billing / page transitions", "issues": ["Fade-in ('rise') animation makes content look faded for about 1s on load. Cosmetic only."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_sahacep_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Fix JobForm: a customer created via the '+ Yeni' dialog must stay selected (guard empty value in pickCustomer)",
+    "Make the free-plan monthly job count tamper-proof (deleting jobs currently gives quota back)",
+    "Handle Clerk Backend API failures in current_member with 503 plus a message instead of a raw 500"
+  ],
+  "critical_code_review_comments": [
+    "server.py is 603 lines; consider splitting into routers (jobs, team, billing, public)",
+    "update_customer returns find_one({'id': cid}) without the company scope. It is safe after matched_count, but keep queries consistent",
+    "Pytest must run with `-n 0` (pytest.ini enables xdist); the tests are sequential/stateful"
+  ],
+  "updated_files": ["/app/backend/tests/clerk_test_users.py (URL-encode the '+' in the email query; the old code failed with 422 'email taken')", "/app/backend/tests/test_sahacep_api.py (new)"],
+  "success_rate": {"backend": "100% (22/22)", "frontend": "~95% (1 bug in the dialog customer pick)"},
+  "test_credentials": "From /app/memory/test_credentials.md: owner/usta/baska +clerk_test@sahacep.com. Tickets work via /sign-in?__clerk_ticket=",
+  "seed_data_creation": "None kept. All TEST_ customers/jobs, the staff membership, invites, the 'other' user's company and pro_until were cleaned up. DB is back to its original state: 1 company, owner member, 1 customer, 1 completed unpaid job.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run `cd /app/backend && python tests/clerk_test_users.py ticket` before each browser session (tickets are single-use), then `python -m pytest tests/test_sahacep_api.py -n 0`. The test teardown removes staff/other memberships and resets pro_until. To test Pro, set companies.pro_until to a future ISO UTC date via motor (load MONGO_URL with dotenv; do not print .env). Jobs page defaults to the 'Aktif' filter (empty if all jobs are completed).",
+  "rca of the issue": "JobForm dialog bug: CustomerDialog.onSaved sets customers=[...l, c] and customer_id=c.id together. Radix Select fires onValueChange('') (from its hidden native select, whose options do not include the new value yet), and pickCustomer('') overwrites customer_id while address keeps c.address. Repro: /app/isler/yeni -> '+ Yeni' -> fill name -> Kaydet -> select shows placeholder -> 'İşi oluştur' -> toast 'Müşteri seçin'. Mitigation: ignore empty values in pickCustomer."
+}
