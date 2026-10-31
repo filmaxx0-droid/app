@@ -1,0 +1,137 @@
+{
+  "project_name": "SahaCep",
+  "app_type": "saas_app_mobile_web",
+  "locale": "tr-TR",
+  "currency": "₺",
+  "date_format": "DD.MM.YYYY",
+  "design_archetype": "THE PERFORMANCE PRO / HIGH CONTRAST TACTICAL FIELD UI",
+  "core_philosophy": "Designed for one-handed outdoor phone usage with massive touch targets (min 48-56px), bottom sticky navigation bar, high contrast for sunlight legibility, minimal clutter, direct status color signals, and a clean professional desktop table view for business owners.",
+  "typography": {
+    "heading_font": "Barlow Condensed, sans-serif",
+    "body_font": "Inter, sans-serif",
+    "monospace_font": "JetBrains Mono, monospace",
+    "font_imports_css": "@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');",
+    "hierarchy": {
+      "h1": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight uppercase font-heading",
+      "h2": "text-2xl sm:text-3xl font-bold tracking-tight font-heading",
+      "h3": "text-xl sm:text-2xl font-bold font-heading",
+      "h4": "text-lg font-semibold font-body",
+      "body": "text-base font-normal leading-relaxed text-slate-800 dark:text-slate-100",
+      "body_sm": "text-sm font-medium text-slate-600 dark:text-slate-300",
+      "label": "text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400"
+    }
+  },
+  "colors": {
+    "palette_mode": "Light default with high contrast outdoor readability, support dark mode toggle",
+    "primary": {
+      "main": "#0F172A",
+      "brand_accent": "#0284C7",
+      "brand_vibrant": "#2563EB",
+      "sunlight_yellow": "#EAB308"
+    },
+    "backgrounds": {
+      "light": "#F8FAFC",
+      "card_light": "#FFFFFF",
+      "dark": "#090D16",
+      "card_dark": "#1E293B"
+    },
+    "status_colors": {
+      "bekliyor": {
+        "bg": "bg-amber-100 dark:bg-amber-950/80",
+        "text": "text-amber-900 dark:text-amber-200",
+        "border": "border-amber-300 dark:border-amber-700",
+        "dot": "bg-amber-500",
+        "label": "Bekliyor"
+      },
+      "yolda": {
+        "bg": "bg-blue-100 dark:bg-blue-950/80",
+        "text": "text-blue-900 dark:text-blue-200",
+        "border": "border-blue-300 dark:border-blue-700",
+        "dot": "bg-blue-500",
+        "label": "Yolda"
+      },
+      "yapiliyor": {
+        "bg": "bg-purple-100 dark:bg-purple-950/80",
+        "text": "text-purple-900 dark:text-purple-200",
+        "border": "border-purple-300 dark:border-purple-700",
+        "dot": "bg-purple-500",
+        "label": "Yapılıyor"
+      },
+      "tamamlandi": {
+        "bg": "bg-emerald-100 dark:bg-emerald-950/80",
+        "text": "text-emerald-900 dark:text-emerald-200",
+        "border": "border-emerald-400 dark:border-emerald-700",
+        "dot": "bg-emerald-500",
+        "label": "Tamamlandı"
+      },
+      "iptal": {
+        "bg": "bg-rose-100 dark:bg-rose-950/80",
+        "text": "text-rose-900 dark:text-rose-200",
+        "border": "border-rose-300 dark:border-rose-700",
+        "dot": "bg-rose-500",
+        "label": "İptal"
+      }
+    },
+    "cta_buttons": {
+      "primary_action": "bg-blue-600 hover:bg-blue-700 text-white font-bold h-14 text-lg rounded-xl shadow-md active:scale-95 transition-transform duration-150",
+      "whatsapp_share": "bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-14 text-base rounded-xl shadow-md active:scale-95 transition-transform duration-150 flex items-center justify-center gap-2",
+      "complete_job": "bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold h-16 text-xl rounded-xl shadow-lg active:scale-95 transition-transform duration-150 w-full"
+    }
+  },
+  "one_hand_mobile_guidelines": {
+    "bottom_nav": "Sticky bottom navigation bar (Height: 64px, z-50) with 5 main destinations: İşler (Jobs), Takvim/Bugün (Today), Yeni İş (+ Big Center Action), Müşteriler (Clients), Rapor/Ayarlar (Owner Dashboard). Fixed to bottom on mobile (<768px).",
+    "touch_targets": "Minimum 48px height for buttons, inputs, and tab triggers. Primary CTA buttons set to 56px - 64px height.",
+    "thumb_zone": "Keep primary completion actions, photo upload trigger, phone call trigger, and WhatsApp link generator near bottom of the viewport on mobile views.",
+    "desktop_adaptation": "On screens >= 768px (md/lg), render a full sidebar navigation on left and expanded wide table views with multi-column filtering, bulk actions, and summary stats."
+  },
+  "grids_and_layouts": {
+    "mobile": "Single column grid (grid-cols-1) with gap-4 and px-4 padding.",
+    "dashboard_grid": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6",
+    "owner_desktop_table": "Full-width responsive tabular card container with horizontal scrolling fallback, clear column sorting, search filter bar, and status pills.",
+    "public_service_form": "Centered max-w-xl mx-auto py-6 px-4 bg-white dark:bg-slate-900 shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800"
+  },
+  "visual_enhancers": {
+    "sunlight_mode": "High contrast 1px solid slate-300 dark:border-slate-700 borders, high contrast text (text-slate-900/white), distinct badge backgrounds, no soft low-contrast gray text.",
+    "photo_upload_preview": "Grid of 2 high-contrast image drop zones for 'Önce (Before)' and 'Sonra (After)' service photos with camera tap trigger, thumbnail preview, image zoom overlay, and remove action.",
+    "whatsapp_card": "Dedicated WhatsApp share card with auto-filled message template (Customer name, Job details, Total amount ₺, Public digital service form link)."
+  },
+  "image_urls": {
+    "hero_technician_1": "https://images.unsplash.com/photo-1621905251918-48416bd8575a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHxfd29ya2VyJTIwcmVwYWlyfGVufDB8fHx8MTc5MzQ0MjcwOHww&ixlib=rb-4.1.0&q=85",
+    "tools_wall": "https://images.unsplash.com/photo-1671040690726-b78261eff126?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaH3dGVjaG5pY2lhbiUyMHRvb2x8ZW58MHx8fDE3OTM0NDI3MDh8MA&ixlib=rb-4.1.0&q=85",
+    "wrench_hand": "https://images.unsplash.com/photo-1611288875785-f62fb9b044a7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaH3dGVjaG5pY2lhbiUyMHRvb2x8ZW58MHx8fDE3OTM0NDI3MDh8MA&ixlib=rb-4.1.0&q=85",
+    "hand_tools": "https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaH3dGVjaG5pY2lhbiUyMHRvb2x8ZW58MHx8fDE3OTM0NDI3MDh8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "component_paths": {
+    "mobile_bottom_nav": "/app/frontend/src/components/MobileBottomNav.js",
+    "desktop_sidebar": "/app/frontend/src/components/DesktopSidebar.js",
+    "job_status_chip": "/app/frontend/src/components/JobStatusChip.js",
+    "photo_upload_zone": "/app/frontend/src/components/PhotoUploadZone.js",
+    "whatsapp_modal": "/app/frontend/src/components/WhatsAppShareModal.js",
+    "public_service_form_page": "/app/frontend/src/pages/PublicServiceForm.js"
+  },
+  "instructions_to_main_agent": [
+    "Ensure ALL views are 100% in Turkish language with Turkish currency (₺) and Turkish date format (DD.MM.YYYY).",
+    "Implement full mobile-first sticky bottom navbar on phones (<768px) and standard sidebar navigation on tablet/desktop.",
+    "Make action buttons massive on mobile so field technicians (kombi, klima, tesisat, elektrik) can tap easily with one hand.",
+    "Support photo uploads for job completion (Önce / Sonra fotoğrafları) with preview, base64/file mock storage, and instant deletion.",
+    "Build the public digital service form view accessible via `/servis-formu/:id` with professional clean layout suitable for printing or customer review via WhatsApp.",
+    "Integrate Clerk/mock auth tabs seamlessly with onboarding (Firma Profil Oluşturma), Free (15 iş/ay) vs Pro (₺399/ay) subscription plan options.",
+    "Add explicit data-testid attribute to all interactive buttons, links, search inputs, tabs, status chips, and form controls."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) where appropriate.",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons. Use lucide-react icons instead.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories = main agent will use placeholder text which is FORBIDDEN.",
+    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
+  ]
+}

@@ -1,0 +1,52 @@
+export const trTR = {
+  locale: "tr-TR",
+  formButtonPrimary: "Devam et",
+  dividerText: "veya",
+  socialButtonsBlockButton: "{{provider|titleize}} ile devam et",
+  formFieldLabel__emailAddress: "E-posta adresi",
+  formFieldLabel__password: "Şifre",
+  formFieldLabel__firstName: "Ad",
+  formFieldLabel__lastName: "Soyad",
+  formFieldInputPlaceholder__emailAddress: "ornek@firma.com",
+  formFieldAction__forgotPassword: "Şifremi unuttum",
+  formFieldHintText__optional: "İsteğe bağlı",
+  backButton: "Geri",
+  footerPageLink__help: "Yardım",
+  signIn: {
+    start: {
+      title: "SahaCep'e giriş yapın",
+      subtitle: "Hoş geldiniz! Devam etmek için giriş yapın",
+      actionText: "Hesabınız yok mu?",
+      actionLink: "Ücretsiz kayıt olun",
+    },
+    password: {
+      title: "Şifrenizi girin",
+      subtitle: "Hesabınıza devam etmek için şifrenizi girin",
+      actionLink: "Başka bir yöntem kullan",
+    },
+    emailCode: {
+      title: "E-postanızı kontrol edin",
+      subtitle: "Devam etmek için",
+      formTitle: "Doğrulama kodu",
+      resendButton: "Kod gelmedi mi? Tekrar gönder",
+    },
+    forgotPasswordAlternativeMethods: { title: "Şifrenizi mi unuttunuz?", label__alternativeMethods: "Veya başka bir yöntemle giriş yapın", blockButton__resetPassword: "Şifremi sıfırla" },
+    resetPassword: { title: "Yeni şifre belirleyin", formButtonPrimary: "Şifreyi sıfırla" },
+  },
+  signUp: {
+    start: {
+      title: "Ücretsiz hesap oluşturun",
+      subtitle: "Saha işlerinizi telefondan yönetmeye başlayın",
+      actionText: "Zaten hesabınız var mı?",
+      actionLink: "Giriş yapın",
+    },
+    emailCode: {
+      title: "E-postanızı doğrulayın",
+      subtitle: "E-postanıza gelen kodu girin",
+      formTitle: "Doğrulama kodu",
+      resendButton: "Kod gelmedi mi? Tekrar gönder",
+    },
+    continue: { title: "Eksik bilgileri doldurun", subtitle: "Devam etmek için", actionText: "Zaten hesabınız var mı?", actionLink: "Giriş yapın" },
+  },
+  userButton: { action__manageAccount: "Hesabı yönet", action__signOut: "Çıkış yap" },
+};
